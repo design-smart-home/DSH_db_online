@@ -1,0 +1,29 @@
+version: "1.0"
+services:
+  db:
+    container_name: "shm_db_api_devices"
+    image: postgres:14.1-alpine
+    restart: always
+    environment:
+      - POSTGRES_USER=postgres
+      - POSTGRES_PASSWORD=postgres
+      - POSTGRES_DB=shm_db_api_devices
+    ports:
+      - "5439:5432"
+    networks:
+      - custom
+  db_test:
+    container_name: "shm_db_api_devices_test"
+    image: postgres:14.1-alpine
+    restart: always
+    environment:
+      - POSTGRES_USER=postgres_test
+      - POSTGRES_PASSWORD=postgres_test
+      - POSTGRES_DB=shm_db_api_devices_test
+    ports:
+      - "5440:5432"
+    networks:
+      - custom
+networks:
+  custom:
+    driver: bridge
