@@ -3,7 +3,6 @@ import uuid
 import pytest
 
 from app.db.models.device import Device
-from app.api.schemas.device import PostDeviceRequest
 
 
 @pytest.fixture

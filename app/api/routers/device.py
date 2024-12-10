@@ -6,7 +6,6 @@ from app.api.schemas.device import (
     GetDeviceResponse,
     PostDeviceRequest,
     PostDeviceResponse,
-    DeleteDeviceRequest,
     DeleteDeviceResponse,
 )
 from app.api.core.device import (
@@ -22,11 +21,15 @@ device_router = APIRouter()
 
 
 @device_router.get("/{device_id}")
-def get_device(device_id: uuid.UUID, db: Session = Depends(get_db)) -> GetDeviceResponse:
+def get_device(
+    device_id: uuid.UUID, db: Session = Depends(get_db)
+) -> GetDeviceResponse:
     device = get_device_by_name(device_id, session=db)
 
     if not device:
-        raise HTTPException(status_code=404, detail=f"Device by name {device_id} not found")
+        raise HTTPException(
+            status_code=404, detail=f"Device by name {device_id} not found"
+        )
 
     return GetDeviceResponse(
         device_id=device.device_id,

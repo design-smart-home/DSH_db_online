@@ -84,7 +84,7 @@ def create_device_in_db():
             type_device=type_device,
             type_value=type_value,
             range_value=range_value,
-            current_value=current_value
+            current_value=current_value,
         )
 
         with session as db:

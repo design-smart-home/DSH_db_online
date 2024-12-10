@@ -10,6 +10,7 @@ import uuid
 #     range_value: List[int]
 #     current_value: int
 
+
 class GetDeviceResponse(BaseModel):
     device_id: uuid.UUID
     name: str

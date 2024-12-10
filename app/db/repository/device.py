@@ -15,8 +15,21 @@ class DeviceRepository:
         if device:
             return device
 
-    def post_device(self, name: str, type_device: str, type_value: str, range_value: List[int], current_value: int) -> Device:
-        device = Device(name=name, type_device=type_device, type_value=type_value, range_value=range_value, current_value=current_value)
+    def post_device(
+        self,
+        name: str,
+        type_device: str,
+        type_value: str,
+        range_value: List[int],
+        current_value: int,
+    ) -> Device:
+        device = Device(
+            name=name,
+            type_device=type_device,
+            type_value=type_value,
+            range_value=range_value,
+            current_value=current_value,
+        )
 
         self._db.add(device)
         self._db.commit()
