@@ -5,12 +5,12 @@ from sqlalchemy import create_engine
 from sqlalchemy.orm import sessionmaker
 
 engine = create_engine(
-    "postgresql://postgres:postgres@localhost:5435/shm_db_api_devices"
+    "postgresql://postgres:postgres@localhost:5439/dsh_db_online"
 )
 _session = sessionmaker(bind=engine, expire_on_commit=False, class_=Session)
 
 
-def get_db() -> Generator[Session]:
+def get_db() -> Generator:
     try:
         session: Session = _session()
         yield session

@@ -1,18 +1,30 @@
 from pydantic import BaseModel
+from typing import List
 import uuid
 
 
-class GetDeviceRequest(BaseModel):
-    name: str
-
+# class GetDeviceRequest(BaseModel):
+#     device_id: uuid.UUID
+#     name: str
+#     type_device: str
+#     range_value: List[int]
+#     current_value: int
 
 class GetDeviceResponse(BaseModel):
     device_id: uuid.UUID
     name: str
+    type_device: str
+    type_value: str
+    range_value: List[int]
+    current_value: int
 
 
 class PostDeviceRequest(BaseModel):
     name: str
+    type_device: str
+    type_value: str
+    range_value: List[int]
+    current_value: int
 
 
 class PostDeviceResponse(BaseModel):
@@ -21,7 +33,7 @@ class PostDeviceResponse(BaseModel):
 
 
 class DeleteDeviceRequest(BaseModel):
-    name: str
+    device_id: uuid.UUID
 
 
 class DeleteDeviceResponse(BaseModel):
