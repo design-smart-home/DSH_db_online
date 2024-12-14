@@ -4,4 +4,4 @@ from app.api.routers.device import device_router
 
 main_router = APIRouter()
 
-main_router.include_router(device_router, prefix="/device", tags=["device"])
+main_router.include_router(device_router, prefix="/devices", tags=["devices"])
