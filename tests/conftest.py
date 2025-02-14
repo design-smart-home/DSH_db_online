@@ -1,3 +1,4 @@
+import uuid
 from typing import Generator, Any
 import subprocess
 
@@ -73,16 +74,16 @@ def client() -> Generator[TestClient, Any, None]:
 def create_device_in_db():
     def wrapper(
         name,
-        type_device,
-        type_value,
+        data_type,
         range_value,
         current_value,
         session: Session,
+        device_id: uuid.UUID | None,
     ):
         device = Device(
+            device_id=device_id,
             name=name,
-            type_device=type_device,
-            type_value=type_value,
+            data_type=data_type,
             range_value=range_value,
             current_value=current_value,
         )

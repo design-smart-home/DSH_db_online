@@ -11,9 +11,8 @@ class Device(Base):
         UUID(as_uuid=True), primary_key=True, default=uuid.uuid4
     )
     name: Mapped[str] = mapped_column(String(20), nullable=False)
-    type_device: Mapped[str] = mapped_column(String(6), nullable=False)
-    type_value: Mapped[str] = mapped_column(String(10), nullable=False)
-    range_value: Mapped[list[int]] = mapped_column(ARRAY(Integer), nullable=False)
+    data_type: Mapped[str] = mapped_column(String(10), nullable=False)
+    range_value: Mapped[list[int, int] | list[float, float]] = mapped_column(ARRAY(Integer), nullable=False)
     current_value: Mapped[int] = mapped_column(Integer(), nullable=False)
 
 

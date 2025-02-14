@@ -7,7 +7,7 @@ from typing import Type
 import uuid
 
 
-def get_device_by_name(device_id: uuid.UUID, session: Session) -> Type[Device] | None:
+def get_device_by_id(device_id: uuid.UUID, session: Session) -> Type[Device] | None:
     device_repo = DeviceRepository(session)
 
     device = device_repo.get_device(device_id=device_id)
@@ -21,8 +21,7 @@ def post_device_(data: PostDeviceRequest, session: Session) -> Device | None:
 
     device = device_repo.post_device(
         name=data.name,
-        type_device=data.type_device,
-        type_value=data.type_value,
+        data_type=data.data_type,
         range_value=data.range_value,
         current_value=data.current_value,
     )

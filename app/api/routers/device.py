@@ -6,25 +6,25 @@ from app.api.schemas.device import (
     GetDeviceResponse,
     PostDeviceRequest,
     PostDeviceResponse,
-    DeleteDeviceResponse,
 )
 from app.api.core.device import (
-    delete_device_by_name,
-    get_device_by_name,
+    delete_device_by_name,    get_device_by_id,
     post_device_,
 )
 
 import uuid
 
+from httpx import Response
+
 
 device_router = APIRouter()
 
 
-@device_router.get("/{device_id}")
+@device_router.get("/{device_id}/1.1")
 def get_device(
     device_id: uuid.UUID, db: Session = Depends(get_db)
 ) -> GetDeviceResponse:
-    device = get_device_by_name(device_id, session=db)
+    device = get_device_by_id(device_id, session=db)
 
     if not device:
         raise HTTPException(
@@ -34,8 +34,7 @@ def get_device(
     return GetDeviceResponse(
         device_id=device.device_id,
         name=device.name,
-        type_device=device.type_device,
-        type_value=device.type_value,
+        data_type=device.data_type,
         range_value=device.range_value,
         current_value=device.current_value,
     )
@@ -56,10 +55,10 @@ def post_device(
     )
 
 
-@device_router.delete("/{device_id}")
+@device_router.delete("/{device_id}", response_model=None)
 def delete_device(
     device_id: uuid.UUID, db: Session = Depends(get_db)
-) -> DeleteDeviceResponse:
+) -> Response:
     device = delete_device_by_name(device_id, session=db)
 
     if not device:
@@ -67,7 +66,4 @@ def delete_device(
             status_code=404, detail=f"Device with ID {device_id} not found"
         )
 
-    return DeleteDeviceResponse(
-        device_id=device.device_id,
-        name=device.name,
-    )
+    return Response(status_code=200)

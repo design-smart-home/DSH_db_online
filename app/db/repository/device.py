@@ -18,15 +18,13 @@ class DeviceRepository:
     def post_device(
         self,
         name: str,
-        type_device: str,
-        type_value: str,
-        range_value: List[int],
+        data_type: str,
+        range_value: list[int, int] | list[float, float],
         current_value: int,
     ) -> Device:
         device = Device(
             name=name,
-            type_device=type_device,
-            type_value=type_value,
+            data_type=data_type,
             range_value=range_value,
             current_value=current_value,
         )
