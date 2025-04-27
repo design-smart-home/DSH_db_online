@@ -15,5 +15,4 @@ class Device(Base):
     range_value: Mapped[list[int, int] | list[float, float]] = mapped_column(ARRAY(Integer), nullable=False)
     current_value: Mapped[int] = mapped_column(Integer(), nullable=False)
 
-
 # check name column type_device
