@@ -33,7 +33,6 @@ def test_create_device_in_db(db, create_device_in_db, params):
 
 def test_post_device(db, client, params):
     response = client.post(f"devices/", json=params)
-
     assert response.status_code == 200
     assert response.json()["name"] == params["name"]
 

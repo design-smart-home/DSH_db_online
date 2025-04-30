@@ -20,6 +20,7 @@ def post_device_(data: PostDeviceRequest, session: Session) -> Device | None:
     device_repo = DeviceRepository(session)
 
     device = device_repo.post_device(
+        user_id=data.user_id,
         name=data.name,
         data_type=data.data_type,
         range_value=data.range_value,
