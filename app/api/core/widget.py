@@ -70,3 +70,11 @@ def update_widget_(
     )
 
     return updated_widget
+
+
+def get_all_widgets_on_dashboard_(dashboard_id: uuid.UUID, session: Session):
+    widget_repo = WidgetRepository(session)
+
+    widgets_on_dashboard = widget_repo.get_all_widgets_on_dashboard(dashboard_id)
+
+    return widgets_on_dashboard

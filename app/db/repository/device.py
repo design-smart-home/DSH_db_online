@@ -15,6 +15,11 @@ class DeviceRepository:
         if device:
             return device
 
+    def get_all_devices_by_user_id(self, user_id: uuid.UUID) -> list[Type[Device]] | None:
+        devices = self._db.query(Device).filter(Device.user_id == user_id).all()
+
+        return devices
+
     def post_device(
         self,
         user_id: uuid.UUID,

@@ -9,7 +9,7 @@ from app.api.schemas.widget import (
 )
 from app.api.core.widget import (
     delete_widget_by_name, get_widget_by_id,
-    post_widget_, update_widget_
+    post_widget_, update_widget_, get_all_widgets_on_dashboard_
 )
 
 import uuid
@@ -92,3 +92,10 @@ def update_widget(
 
     if widget:
         return {"status_code": 200, "message": "OK"}
+
+
+@widget_router.get("/widgets_on_dashboard/{dashboard_id}")
+def get_all_widgets_on_dashboard(dashboard_id: uuid.UUID, db: Session = Depends(get_db)):
+    widgets_on_dashboard = get_all_widgets_on_dashboard_(dashboard_id, db)
+
+    return widgets_on_dashboard

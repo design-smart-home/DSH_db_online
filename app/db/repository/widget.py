@@ -1,5 +1,6 @@
 from sqlalchemy.orm import Session
 
+from app.db.models.dashboard import Dashboard
 from app.db.models.widget import Widget
 from typing import Type, List
 import uuid
@@ -14,6 +15,15 @@ class WidgetRepository:
 
         if widget:
             return widget
+
+    def get_all_widgets_on_dashboard(self, dashboard_id: uuid.UUID):
+        dashboard = self._db.query(Dashboard).filter(Dashboard.dashboard_id == dashboard_id).one()
+
+        widgets_ids = dashboard.devices_ids # its widgets_ids!
+
+        widgets_on_dashboard = self._db.query(Widget).filter(Widget.widget_id.in_(widgets_ids)).all()
+
+        return widgets_on_dashboard
 
     def post_widget(
         self,
